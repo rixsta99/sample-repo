@@ -14,6 +14,24 @@
         h2 {
             font-size: 1.5em; /* GitHub's approximate h2 font size */
         }
+        hr {
+            margin-top: 1em; /* Add margin above the horizontal line */
+            margin-bottom: 1em; /* Add margin below the horizontal line */
+            border: none;
+            border-top: 1px solid #e1e4e8; /* GitHub's default horizontal line color */
+        }
+        table {
+            border-collapse: collapse;
+        }
+        table td {
+            border: none;
+            padding: 0;
+        }
+        img {
+            width: 427px;
+            height: 315px;
+            display: block;
+        }
         ul {
             margin-bottom: 1em; /* GitHub's default margin-bottom for lists */
         }
@@ -21,13 +39,24 @@
 </head>
 <body>
     <h2>Aspen Tree</h2>
-    <hr>
-    <p>Aspen Tree provides custom IT solutions for businesses in Australia. Areas of expertise include:</p>
-    <ul>
-        <li>AWS Cloud & Azure Cloud</li>
-        <li>CI/CD using AWS Cloud Formation, GitHub Actions/Packages/APIs, Python, AWS CDK, Terraform, Ansible, Jenkins</li>
-        <li>Full stack web development using Node.js, Python, React, MongoDB & Node Express</li>
-        <li>Backend integration & APIs using open source and proprietary platforms with REST APIs, Kafka, SpringBoot</li>
-    </ul>
+    <hr> <!-- Horizontal line -->
+    <table>
+        <tr>
+            <td>
+                <!-- Image Placeholder (Replace with actual image) -->
+                <img src="../img/aspentree_logo_lrg.jpg" alt="Aspen Tree logo">
+            </td>
+            <td>
+                <!-- Existing Text -->
+                <p>Aspen Tree provides custom IT solutions for businesses in Australia. Areas of expertise include:</p>
+                <ul>
+                    <li>AWS Cloud & Azure Cloud</li>
+                    <li>CI/CD using AWS Cloud Formation, GitHub Actions/Packages/APIs, Python, AWS CDK, Terraform, Ansible, Jenkins</li>
+                    <li>Full stack web development using Node.js, Python, React, MongoDB & Node Express</li>
+                    <li>Backend integration & APIs using open source and proprietary platforms with REST APIs, Kafka, SpringBoot</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
