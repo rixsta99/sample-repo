@@ -10,53 +10,62 @@
             font-size: 16px;
             line-height: 1.6;
             color: #24292e; /* GitHub default text color */
-        }
-        h2 {
-            font-size: 1.5em; /* GitHub's approximate h2 font size */
-        }
-        hr {
-            margin-top: 1em; /* Add margin above the horizontal line */
-            margin-bottom: 1em; /* Add margin below the horizontal line */
-            border: none;
-            border-top: 1px solid #e1e4e8; /* GitHub's default horizontal line color */
-        }
-        table {
-            border-collapse: collapse;
-        }
-        table td {
-            border: none;
+            margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        img {
-            width: 427px;
-            height: 315px;
+        .container {
+            display: flex;
+            align-items: center;
+            max-width: 800px; /* Set maximum width for the content */
+            width: 100%;
+            padding: 0 20px; /* Add some horizontal padding */
+            box-sizing: border-box; /* Ensure padding is included in the width */
+        }
+        .logo {
+            flex-shrink: 0; /* Prevent logo from shrinking */
+            margin-right: 20px; /* Add some space between logo and text */
+        }
+        .logo img {
+            max-width: 100px; /* Set maximum width for the logo */
+            height: auto;
             display: block;
         }
-        .text-column {
-            width: 50%; /* Adjust the width of the text column as needed */
+        .text {
+            flex-grow: 1; /* Allow text to grow and fill remaining space */
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 0; /* Remove default margin */
+        }
+        hr {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            border: none;
+            border-top: 1px solid #e1e4e8;
         }
         ul {
-            margin-bottom: 1em; /* GitHub's default margin-bottom for lists */
+            margin-bottom: 1em;
         }
     </style>
 </head>
 <body>
-    <table>
-        <tr>
-            <td>
-                <img src="../img/aspentree_logo_lrg.jpg" alt="Aspen Tree logo">
-            </td>
-            <td class="text-column">
-                <!-- Existing Text -->
-                <p>Aspen Tree provides custom IT solutions for businesses in Australia. Areas of expertise include:</p>
-                <ul>
-                    <li>AWS Cloud & Azure Cloud</li>
-                    <li>CI/CD using AWS Cloud Formation, GitHub Actions/Packages/APIs, Python, AWS CDK, Terraform, Ansible, Jenkins</li>
-                    <li>Full stack web development using Node.js, Python, React, MongoDB & Node Express</li>
-                    <li>Backend integration & APIs using open source and proprietary platforms with REST APIs, Kafka, SpringBoot</li>
-                </ul>
-            </td>
-        </tr>
-    </table>
+    <div class="container">
+        <div class="logo">
+            <img src="../img/aspentree_logo_lrg.jpg" alt="Aspen Tree logo">
+        </div>
+        <div class="text">
+            <p>Aspen Tree provides custom IT solutions for businesses in Australia. Areas of expertise include:</p>
+            <ul>
+                <li>AWS Cloud & Azure Cloud</li>
+                <li>CI/CD using AWS Cloud Formation, GitHub Actions/Packages/APIs, Python, AWS CDK, Terraform, Ansible, Jenkins</li>
+                <li>Full stack web development using Node.js, Python, React, MongoDB & Node Express</li>
+                <li>Backend integration & APIs using open source and proprietary platforms with REST APIs, Kafka, SpringBoot</li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
