@@ -20,6 +20,7 @@
         }
         .content-container {
             display: flex;
+            flex-direction: column; /* Align children vertically */
             align-items: center;
             max-width: 1200px; /* Set maximum width for the content */
             width: 100%;
@@ -28,16 +29,14 @@
             margin-bottom: 2em; /* Add space between content and copyright statement */
         }
         .logo {
-            flex-shrink: 1; /* Allow logo to shrink */
-            margin-right: 20px; /* Add some space between logo and text */
+            margin-bottom: 20px; /* Add space between logo and text */
         }
         .logo img {
-            max-width: 100%; /* Set the image width to fill the container */
+            width: 427px; /* Set the image width */
             height: auto; /* Maintain aspect ratio */
-            max-height: 315px; /* Set the maximum height for the logo */
+            max-width: 100%; /* Ensure the logo doesn't overflow its container */
         }
         .text {
-            flex-grow: 1; /* Allow text to grow and fill remaining space */
             text-align: center; /* Center text */
         }
         h2 {
@@ -49,6 +48,7 @@
             margin-bottom: 1em;
             border: none;
             border-top: 1px solid #e1e4e8;
+            width: 100%; /* Ensure the horizontal rule spans the entire width */
         }
         ul {
             margin-bottom: 1em;
@@ -62,9 +62,9 @@
                 flex-direction: row; /* Change flex direction for larger screens */
                 justify-content: center; /* Center children horizontally */
             }
-            .logo img {
-                margin-right: 0; /* Remove right margin for the logo on larger screens */
-                margin-bottom: 0; /* Remove bottom margin for the logo on larger screens */
+            .logo {
+                margin-bottom: 0; /* Remove space between logo and text on larger screens */
+                margin-right: 20px; /* Add some space between logo and text */
             }
             .text {
                 text-align: left; /* Align text to the left on larger screens */
@@ -82,19 +82,4 @@
             <p>Aspen Tree provides custom IT solutions for businesses in Australia. Areas of expertise include:</p>
             <ul>
                 <li>AWS Cloud & Azure Cloud</li>
-                <li>CI/CD using AWS Cloud Formation, GitHub Actions/Packages/APIs, Python, AWS CDK, Terraform, Ansible, Jenkins</li>
-                <li>Full stack web development using Node.js, Python, React, MongoDB & Node Express</li>
-                <li>Backend integration & APIs using open source and proprietary platforms with REST APIs, Kafka, SpringBoot</li>
-            </ul>
-        </div>
-    </div>
-    <div class="copyright" id="currentYear">
-        &copy; 2014-<span id="year"></span>, Aspen Tree
-    </div>
-
-    <script>
-        var year = new Date().getFullYear();
-        document.getElementById("year").innerText = year;
-    </script>
-</body>
-</html>
+                <li>CI/CD using AWS Cloud Formation, GitHub Act
