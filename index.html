@@ -16,18 +16,20 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            flex-direction: column; /* Align children vertically */
         }
-        .container {
+        .content-container {
             display: flex;
             align-items: center;
             max-width: 1200px; /* Set maximum width for the content */
             width: 100%;
             padding: 0 20px; /* Add some horizontal padding */
             box-sizing: border-box; /* Ensure padding is included in the width */
+            margin-bottom: 2em; /* Add space between content and copyright statement */
         }
         .logo {
             /* flex-shrink: 0; Prevent logo from shrinking */
-            margin-right: 10px; /* Add some space between logo and text */
+            margin-right: 20px; /* Add some space between logo and text */
         }
         .logo img {
             width: 427px; /* Set the image width */
@@ -50,10 +52,13 @@
         ul {
             margin-bottom: 1em;
         }
+        .copyright {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="content-container">
         <div class="logo">
             <img src="../img/aspentree_logo_lrg.jpg" alt="Aspen Tree logo">
         </div>
@@ -67,5 +72,13 @@
             </ul>
         </div>
     </div>
+    <div class="copyright" id="currentYear">
+        &copy; Aspen Tree <span id="year"></span>
+    </div>
+
+    <script>
+        var year = new Date().getFullYear();
+        document.getElementById("year").innerText = year;
+    </script>
 </body>
 </html>
