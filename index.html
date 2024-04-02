@@ -28,13 +28,13 @@
             margin-bottom: 2em; /* Add space between content and copyright statement */
         }
         .logo {
-            /* flex-shrink: 0; Prevent logo from shrinking */
+            flex-shrink: 1; /* Allow logo to shrink */
             margin-right: 20px; /* Add some space between logo and text */
         }
         .logo img {
-            width: 427px; /* Set the image width */
-            height: 315px; /* Set the image height */
-            display: block;
+            max-width: 100%; /* Set the image width to fill the container */
+            height: auto; /* Maintain aspect ratio */
+            max-height: 315px; /* Set the maximum height for the logo */
         }
         .text {
             flex-grow: 1; /* Allow text to grow and fill remaining space */
