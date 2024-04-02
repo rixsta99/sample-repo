@@ -38,6 +38,7 @@
         }
         .text {
             flex-grow: 1; /* Allow text to grow and fill remaining space */
+            text-align: center; /* Center text */
         }
         h2 {
             font-size: 1.5em;
@@ -54,6 +55,21 @@
         }
         .copyright {
             text-align: center;
+        }
+
+        @media screen and (min-width: 768px) {
+            .content-container {
+                flex-direction: row; /* Change flex direction for larger screens */
+                justify-content: center; /* Center children horizontally */
+            }
+            .logo img {
+                margin-right: 0; /* Remove right margin for the logo on larger screens */
+                margin-bottom: 0; /* Remove bottom margin for the logo on larger screens */
+            }
+            .text {
+                text-align: left; /* Align text to the left on larger screens */
+                margin-left: 20px; /* Add space between logo and text on larger screens */
+            }
         }
     </style>
 </head>
