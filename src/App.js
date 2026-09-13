@@ -200,6 +200,7 @@ const proofPoints = [
   { value: "700k+", label: "records migrated & platform decommissioned", detail: "Serverless AWS migration and legacy platform decommission, delivered fully automated via CI/CD." },
   { value: "30+", label: "stakeholders led through a critical PIR", detail: "Directed real-time remediation on payment-critical infrastructure through to root-cause resolution." },
   { value: "10k+", label: "technical knowledge contributions", detail: "Primary author of the organization's integration architecture knowledge base." },
+  { value: "62%+", label: "throughput gain on a legacy system", detail: "Thread-pool concurrency and in-memory caching lifted sustained processing from ~800 to ~1,300 items/hr, with no re-architecture." },
 ];
 
 const technologyGroups = [
@@ -269,6 +270,12 @@ const engagements = [
     title: "External gateway: hardship platform integration",
     description: "Led the end-to-end architecture exposing arrears & hardship mailboxes to a third-party servicing partner via a standardized, OAuth2/JWT-secured gateway — Private Key JWT authentication with internally issued certificates, resource-level throttling per operation, and a facade layer that kept the partner fully abstracted from internal cloud and identity complexity.",
     icon: IconEnvelope,
+    diagram: {
+      id: "private-key-jwt",
+      title: "Private Key JWT gateway sequence",
+      blurb: "Client ingress authentication, API gateway enforcement, certificate-based JWT exchange, and payload delivery, sequenced end to end.",
+      src: "diagrams/private-key-jwt.png",
+    },
   },
   {
     number: "02",
@@ -281,6 +288,7 @@ const engagements = [
     title: "Contribution clearing: multi-threaded processing overhaul",
     description: "Re-architected a legacy single-threaded contribution pipeline to meet a regulatory-driven volume increase, then led triage of the resulting thread-safety defect — building a secure, PII-redacted production replay capability, and standing up a masked-payload volume-testing framework to validate capacity ahead of future peak windows.",
     icon: IconThreads,
+    readMoreHref: "#case-study",
   },
   {
     number: "04",
@@ -343,6 +351,40 @@ const pantherPatterns = [
   },
 ];
 
+const pantherDiagrams = [
+  {
+    id: "agentic-patterns",
+    title: "Three agentic AI patterns",
+    blurb: "RAG, a containerized agent service, and a direct-from-API agent loop — the three patterns above, drawn out end to end.",
+    src: "diagrams/ai-agentic-arch-patterns.png",
+  },
+  {
+    id: "platform-architecture",
+    title: "Platform architecture",
+    blurb: "How the platform's UI, API, and probing services connect to internal systems and push agents, down to an illustrative deployment.",
+    src: "diagrams/panther-arch.png",
+  },
+  {
+    id: "integration-philosophy",
+    title: "Why a composable platform wins",
+    blurb: "Point-to-point vs. a composable integration hub vs. a monolithic ESB, compared on separation of concerns, observability, and vendor portability.",
+    src: "diagrams/integration_arch_patterns.png",
+  },
+];
+
+const throughputCaseStudy = {
+  headline: "Legacy System Stabilization: High-Throughput Concurrent Processing Under SLA Pressure",
+  problem: "Single-threaded processing created a hard bottleneck during peak transaction periods, risking operational SLA breaches on a mission-critical legacy platform. A full serverless re-architecture was out of scope given delivery deadlines and risk tolerance.",
+  solution: "Introduced thread-pool concurrency, in-memory caching to eliminate redundant lookups, and ThreadLocal context isolation — unlocking safe parallel execution within the existing legacy container, with no change to the surrounding infrastructure.",
+  impact: "62%+ increase in transaction throughput (roughly 800 to 1,300 items/hr), stabilizing the system and removing SLA risk while preserving the existing infrastructure investment.",
+  diagram: {
+    id: "throughput-tactical-improvements",
+    title: "Concurrent processing under SLA pressure",
+    blurb: "Thread-pool worker execution, in-memory lookup caching, and ThreadLocal session isolation, sequenced end to end.",
+    src: "diagrams/throughput_tactical_improvements.png",
+  },
+};
+
 const incidentPractices = [
   { title: "Stabilize", detail: "Protect throughput, data integrity, and customer-facing services while the issue is understood." },
   { title: "Diagnose", detail: "Use traces, logs, metrics, replayable test data, and dependency knowledge to find the real constraint." },
@@ -367,6 +409,7 @@ const App = () => {
   const year = new Date().getFullYear();
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [contactStatus, setContactStatus] = useState("idle");
+  const [openDiagram, setOpenDiagram] = useState(null);
   const isMobile = useMediaQuery("(max-width: 760px)");
   const isSmallMobile = useMediaQuery("(max-width: 420px)");
 
@@ -541,8 +584,118 @@ const App = () => {
                       ))}
                     </ol>
                   )}
+                  {engagement.diagram && (
+                    <button
+                      type="button"
+                      onClick={() => setOpenDiagram(engagement.diagram)}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        marginTop: "10px",
+                        padding: "6px",
+                        width: "100%",
+                        background: BG_GREEN,
+                        border: "none",
+                        borderRadius: "6px",
+                        cursor: "pointer",
+                        textAlign: "left",
+                        fontFamily: "inherit",
+                      }}
+                    >
+                      <img
+                        src={process.env.PUBLIC_URL + "/" + engagement.diagram.src}
+                        alt={engagement.diagram.title}
+                        style={{ width: "56px", height: "40px", objectFit: "cover", objectPosition: "top", borderRadius: "4px", flexShrink: 0, border: "1px solid #d5e2da" }}
+                      />
+                      <span style={{ fontSize: "0.78rem", fontWeight: 700, color: BRAND_GREEN }}>
+                        View sequence diagram &#8594;
+                      </span>
+                    </button>
+                  )}
+                  {engagement.readMoreHref && (
+                    <a
+                      href={engagement.readMoreHref}
+                      style={{
+                        display: "inline-block",
+                        marginTop: "10px",
+                        padding: "6px 12px",
+                        background: BG_GREEN,
+                        color: BRAND_GREEN,
+                        borderRadius: "20px",
+                        fontSize: "0.78rem",
+                        fontWeight: 700,
+                        textDecoration: "none",
+                      }}
+                    >
+                      Read more &#8594;
+                    </a>
+                  )}
                 </article>
               ))}
+            </div>
+            <div style={backToTopWrapStyle}>
+              <a className="back-to-top" href="#top" style={backToTopLinkStyle}>Back to top <span aria-hidden="true">&#8593;</span></a>
+            </div>
+          </div>
+        </section>
+
+        <section className="case-study-section" id="case-study" aria-labelledby="case-study-title" style={{ background: BG_GREY, marginBottom: SECTION_GAP }}>
+          <div className="section" style={{ padding: "32px 24px" }}>
+            <div className="aspen-centered" style={{ marginBottom: "24px" }}>
+              <span style={{ ...cardNumberStyle, display: "inline-block" }}>CASE STUDY</span>
+              <h2 id="case-study-title" style={{ ...sectionHeadingStyle, margin: "0 auto" }}>{throughputCaseStudy.headline}</h2>
+            </div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "minmax(0, 1.4fr) minmax(240px, 1fr)",
+                gap: "20px",
+                alignItems: "start",
+              }}
+            >
+              <div style={{ display: "grid", gap: "14px" }}>
+                <div style={cardStyle}>
+                  <span style={cardNumberStyle}>Problem</span>
+                  <p style={{ ...cardTextStyle, fontSize: "0.92rem" }}>{throughputCaseStudy.problem}</p>
+                </div>
+                <div style={cardStyle}>
+                  <span style={cardNumberStyle}>Tactical solution</span>
+                  <p style={{ ...cardTextStyle, fontSize: "0.92rem" }}>{throughputCaseStudy.solution}</p>
+                </div>
+                <div style={{ ...cardStyle, background: "#eef6f0" }}>
+                  <span style={cardNumberStyle}>Measurable impact</span>
+                  <p style={{ ...cardTextStyle, fontSize: "0.92rem" }}>{throughputCaseStudy.impact}</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setOpenDiagram(throughputCaseStudy.diagram)}
+                style={{
+                  ...cardStyle,
+                  borderLeft: "none",
+                  padding: 0,
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  textAlign: "left",
+                  fontFamily: "inherit",
+                  display: "block",
+                  width: "100%",
+                }}
+              >
+                <img
+                  src={process.env.PUBLIC_URL + "/" + throughputCaseStudy.diagram.src}
+                  alt={throughputCaseStudy.diagram.title}
+                  style={{ width: "100%", height: "220px", objectFit: "cover", objectPosition: "top", display: "block", borderBottom: "1px solid #e6ebe8" }}
+                />
+                <div style={{ padding: "12px 14px" }}>
+                  <h4 style={{ ...cardTitleStyle, fontSize: "0.92rem" }}>{throughputCaseStudy.diagram.title}</h4>
+                  <p style={{ ...cardTextStyle, fontSize: "0.82rem" }}>{throughputCaseStudy.diagram.blurb}</p>
+                  <span style={{ display: "inline-block", marginTop: "6px", fontSize: "0.78rem", fontWeight: 700, color: BRAND_GREEN }}>
+                    View diagram &#8594;
+                  </span>
+                </div>
+              </button>
             </div>
             <div style={backToTopWrapStyle}>
               <a className="back-to-top" href="#top" style={backToTopLinkStyle}>Back to top <span aria-hidden="true">&#8593;</span></a>
@@ -611,6 +764,46 @@ const App = () => {
                     <h4 style={{ ...cardTitleStyle, fontSize: "0.95rem" }}>{pattern.title}</h4>
                     <p style={cardTextStyle}>{pattern.detail}</p>
                   </div>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ marginTop: "18px" }}>
+              <h3 style={{ ...cardTitleStyle, fontSize: "1rem", marginBottom: "4px" }}>Architecture at a glance</h3>
+              <p style={{ ...cardTextStyle, marginBottom: "10px" }}>
+                Diagrams generalized for public sharing — structure and technology choices are accurate; specific hostnames, IP ranges, and internal names are illustrative.
+              </p>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(230px, 1fr))", gap: "14px" }}>
+                {pantherDiagrams.map((diagram) => (
+                  <button
+                    key={diagram.id}
+                    type="button"
+                    onClick={() => setOpenDiagram(diagram)}
+                    style={{
+                      ...cardStyle,
+                      borderLeft: "none",
+                      padding: 0,
+                      overflow: "hidden",
+                      cursor: "pointer",
+                      textAlign: "left",
+                      fontFamily: "inherit",
+                      display: "block",
+                      width: "100%",
+                    }}
+                  >
+                    <img
+                      src={process.env.PUBLIC_URL + "/" + diagram.src}
+                      alt={diagram.title}
+                      style={{ width: "100%", height: "150px", objectFit: "cover", objectPosition: "top", display: "block", borderBottom: "1px solid #e6ebe8" }}
+                    />
+                    <div style={{ padding: "12px 14px" }}>
+                      <h4 style={{ ...cardTitleStyle, fontSize: "0.92rem" }}>{diagram.title}</h4>
+                      <p style={{ ...cardTextStyle, fontSize: "0.82rem" }}>{diagram.blurb}</p>
+                      <span style={{ display: "inline-block", marginTop: "6px", fontSize: "0.78rem", fontWeight: 700, color: BRAND_GREEN }}>
+                        View diagram &#8594;
+                      </span>
+                    </div>
+                  </button>
                 ))}
               </div>
             </div>
@@ -914,6 +1107,70 @@ const App = () => {
                 </button>
               </form>
             )}
+          </div>
+        </div>
+      )}
+
+      {openDiagram && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="diagram-modal-title"
+          onClick={() => setOpenDiagram(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(20, 24, 22, 0.75)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+            padding: "20px",
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: "#ffffff",
+              borderRadius: "10px",
+              maxWidth: "1100px",
+              width: "100%",
+              maxHeight: "90vh",
+              overflow: "auto",
+              padding: "24px",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
+              position: "relative",
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setOpenDiagram(null)}
+              aria-label="Close diagram"
+              style={{
+                position: "absolute",
+                top: "16px",
+                right: "16px",
+                background: "none",
+                border: "none",
+                fontSize: "20px",
+                lineHeight: 1,
+                cursor: "pointer",
+                color: "#666",
+              }}
+            >
+              &#10005;
+            </button>
+            <h3 id="diagram-modal-title" style={{ marginTop: 0, marginBottom: "6px", fontSize: "1.2rem" }}>
+              {openDiagram.title}
+            </h3>
+            <p style={{ marginTop: 0, marginBottom: "16px", color: "#555", fontSize: "0.92rem" }}>
+              {openDiagram.blurb}
+            </p>
+            <img
+              src={process.env.PUBLIC_URL + "/" + openDiagram.src}
+              alt={openDiagram.title}
+              style={{ width: "100%", height: "auto", borderRadius: "6px", border: "1px solid #eee", display: "block" }}
+            />
           </div>
         </div>
       )}
