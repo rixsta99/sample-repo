@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./HomePage.css";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xkjnlnjl";
@@ -348,10 +348,26 @@ const incidentPractices = [
   { title: "Strengthen", detail: "Convert incident learning into automation, alerting, capacity testing, and durable architecture improvements." },
 ];
 
+const useMediaQuery = (query) => {
+  const [matches, setMatches] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(query).matches
+  );
+  useEffect(() => {
+    const mql = window.matchMedia(query);
+    const handler = (e) => setMatches(e.matches);
+    setMatches(mql.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, [query]);
+  return matches;
+};
+
 const App = () => {
   const year = new Date().getFullYear();
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [contactStatus, setContactStatus] = useState("idle");
+  const isMobile = useMediaQuery("(max-width: 760px)");
+  const isSmallMobile = useMediaQuery("(max-width: 420px)");
 
   const openContact = (e) => {
     e.preventDefault();
@@ -408,7 +424,12 @@ const App = () => {
           <img
             src={process.env.PUBLIC_URL + "/logo.jpg"}
             alt="Aspen Tree"
-            style={{ height: "170px", width: "auto", objectFit: "contain", maxWidth: "none" }}
+            style={{
+              height: isSmallMobile ? "60px" : isMobile ? "90px" : "170px",
+              width: "auto",
+              objectFit: "contain",
+              maxWidth: "none",
+            }}
           />
         </a>
         <div className="header-actions">
@@ -446,7 +467,7 @@ const App = () => {
               }}
             >
               <p style={{ margin: 0, fontSize: "1.35rem", lineHeight: 1.5, color: "#2a2a2a" }}>
-                Aspen Tree specialises in Integration architecture, incident leadership, DevOps automation, and agentic AI — applied where it earns its place: across banking, superannuation, operations teams and enterprise integration.
+                Aspen Tree specialises in Integration architecture, incident leadership, DevOps automation, and agentic AI — applied across banking, SaaS providers, external partner apis, advice, customer service, superannuation, operations teams and enterprise integration.
               </p>
             </div>
 
@@ -492,9 +513,16 @@ const App = () => {
         <section className="engagements-section" id="engagements" aria-labelledby="engagements-title" style={{ background: BG_GREEN, marginBottom: SECTION_GAP }}>
           <div className="section" style={{ padding: "32px 24px" }}>
             <div className="aspen-centered" style={{ marginBottom: "24px" }}>
-              <h2 id="engagements-title" style={{ ...sectionHeadingStyle, margin: "0 auto", whiteSpace: "nowrap" }}>Complex systems, delivered with confidence.</h2>
+              <h2 id="engagements-title" style={{ ...sectionHeadingStyle, margin: "0 auto" }}>Complex systems, delivered with confidence.</h2>
             </div>
-            <div className="capability-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "14px" }}>
+            <div
+              className="capability-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
+                gap: "14px",
+              }}
+            >
               {engagements.map((engagement) => (
                 <article key={engagement.number} style={{ ...cardStyle, borderLeft: `2px solid ${BRAND_GREEN}`, padding: "16px 18px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "14px", minHeight: "38px", marginBottom: "6px", padding: "4px", overflow: "visible" }}>
