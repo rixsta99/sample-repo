@@ -148,8 +148,9 @@ const IconThreads = () => (
 const IconGauge = () => (
   <IconWrap>
     <path d="M4 16a8 8 0 0 1 16 0" />
-    <line x1="12" y1="16" x2="16" y2="10" />
-    <circle cx="12" cy="16" r="1.2" fill={BRAND_GREEN} stroke="none" />
+    <line x1="4" y1="16" x2="20" y2="16" />
+    <line x1="12" y1="16" x2="16" y2="9.5" />
+    <circle cx="12" cy="16" r="1.3" fill={BRAND_GREEN} stroke="none" />
   </IconWrap>
 );
 const IconMonitor = () => (
@@ -472,7 +473,7 @@ const App = () => {
             </div>
 
             <div style={{ background: "#ffffff", borderRadius: "10px", padding: "12px" }}>
-              <a href="#capabilities-title" aria-label="Explore the work">
+              <a href="#panther-title" aria-label="Explore the work">
                 <img
                   src={process.env.PUBLIC_URL + "/panther-logo.png"}
                   alt="Panther API"
