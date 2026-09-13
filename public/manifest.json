@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
   "short_name": "Aspen Tree",
   "name": "Aspen Tree | Integration Architecture",
-=======
-  "short_name": "React App",
-  "name": "Create React App Sample",
->>>>>>> 3ea82893c4a28af3be9d5072a3e8efae46d545a4
   "icons": [
     {
       "src": "favicon.ico",
@@ -25,11 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-<<<<<<< HEAD
   "theme_color": "#17352d",
   "background_color": "#f4f1e8"
-=======
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
->>>>>>> 3ea82893c4a28af3be9d5072a3e8efae46d545a4
 }
