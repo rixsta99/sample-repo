@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
+<<<<<<< HEAD
 test('renders the Aspen Tree architecture homepage', () => {
   render(<App />);
 
@@ -21,4 +22,10 @@ test('does not expose personal or employer-specific details', () => {
 
   expect(page).not.toMatch(/ricki|amp|brisbane|@|0410|payday|superchoice/i);
   expect(page).not.toMatch(/phone/i);
+=======
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+>>>>>>> 3ea82893c4a28af3be9d5072a3e8efae46d545a4
 });

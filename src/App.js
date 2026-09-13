@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import "./HomePage.css";
 
@@ -893,3 +894,14 @@ const App = () => {
 };
 
 export default App;
+=======
+
+import React from "react";
+import HomePage from "./HomePage";
+
+function App() {
+  return <HomePage />;
+}
+
+export default App;
+>>>>>>> 3ea82893c4a28af3be9d5072a3e8efae46d545a4
